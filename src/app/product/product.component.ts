@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {InventoryService} from '../inventory.service';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +12,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   private proUnsub: Subscription;
   private products = [];
 
-  constructor(private inventoryService: InventoryService) {
+  constructor(private inventoryService: InventoryService, private router: Router) {
     this.inventoryService.getProducts();
     /*this.products = this.inventoryService.productList;
     console.log(this.products);*/
@@ -25,7 +26,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
 
   showAlert(id: string) {
-    alert(id);
+    this.router.navigateByUrl('/product/view/' + id);
   }
 
   ngOnDestroy(): void {

@@ -35,4 +35,17 @@ export class InventoryService {
       console.log(output);
     });
   }
+  public getSingleProducts(pid) {
+    const url = 'http://localhost:3000/product/';
+    return this.http.get<any>(url + pid).pipe(map(response => {
+      return response.response.map(
+        name => name,
+        id => id,
+        description => description,
+        created_at => created_at
+      );
+    })).subscribe(output => {
+      this.productsUpdate.next(output);
+    });
+  }
 }
