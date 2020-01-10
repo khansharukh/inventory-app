@@ -18,8 +18,8 @@ export class InventoryService {
 
   constructor(private http: HttpClient) { }
 
-  public getProducts() {
-    const url = 'http://localhost:3000/products';
+  public getProducts(uid) {
+    const url = 'http://localhost:3000/products/' + uid;
     return this.http.get<any>(url).pipe(map(response => {
       return response.response.map(
         name => name,

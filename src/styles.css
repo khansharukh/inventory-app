@@ -102,6 +102,9 @@ svg.material-icons:not(:last-child) {
   height: 16px;
   width: 168px;
 }
+.card-small {
+  min-width: 220px!important;
+}
 
 .card-container .card:not(.highlight-card) {
   cursor: pointer;

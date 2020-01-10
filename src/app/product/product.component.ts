@@ -12,13 +12,17 @@ export class ProductComponent implements OnInit, OnDestroy {
   private proUnsub: Subscription;
   private proDelete: Subscription;
   private products = [];
+  private user;
+  private userId;
 
   constructor(private inventoryService: InventoryService, private router: Router) {
-    const user = JSON.parse(localStorage.getItem('user_auth'));
-    if (!user) {
+    this.user = JSON.parse(localStorage.getItem('user_auth'));
+    if (!this.user) {
       this.router.navigateByUrl('');
     }
-    this.inventoryService.getProducts();
+    this.userId = this.user[0].id;
+    if (!this.userId) { return; }
+    this.inventoryService.getProducts(this.userId);
     /*this.products = this.inventoryService.productList;
     console.log(this.products);*/
   }
@@ -38,7 +42,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     if (conf === true) {
       this.inventoryService.removeProducts(id);
       this.proDelete = this.inventoryService.productsDelete.subscribe(pro => {
-        this.inventoryService.getProducts();
+        this.inventoryService.getProducts(this.userId);
       });
     }
     return false;
