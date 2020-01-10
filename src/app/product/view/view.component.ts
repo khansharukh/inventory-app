@@ -15,14 +15,13 @@ export class ViewComponent implements OnInit, OnDestroy {
 
   constructor(private inventoryService: InventoryService, private route: ActivatedRoute) {
     this.proUnsub = this.inventoryService.productsUpdate.subscribe(pro => {
-      this.product = pro;
+      this.product = pro[0];
     });
   }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
       const pid = params.id;
-      alert(pid);
       this.inventoryService.getSingleProducts(pid);
     });
   }
