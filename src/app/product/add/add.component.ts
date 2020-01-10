@@ -9,7 +9,12 @@ import {Router} from '@angular/router';
 })
 export class AddComponent implements OnInit {
 
-  constructor(private inventoryService: InventoryService, private router: Router) { }
+  constructor(private inventoryService: InventoryService, private router: Router) {
+    const user = JSON.parse(localStorage.getItem('user_auth'));
+    if (!user) {
+      this.router.navigateByUrl('');
+    }
+  }
 
   ngOnInit() {
   }

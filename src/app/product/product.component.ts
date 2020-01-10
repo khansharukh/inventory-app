@@ -14,6 +14,10 @@ export class ProductComponent implements OnInit, OnDestroy {
   private products = [];
 
   constructor(private inventoryService: InventoryService, private router: Router) {
+    const user = JSON.parse(localStorage.getItem('user_auth'));
+    if (!user) {
+      this.router.navigateByUrl('');
+    }
     this.inventoryService.getProducts();
     /*this.products = this.inventoryService.productList;
     console.log(this.products);*/
@@ -41,6 +45,8 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.proUnsub.unsubscribe();
+    if (this.proUnsub) {
+      this.proUnsub.unsubscribe();
+    }
   }
 }

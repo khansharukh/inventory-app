@@ -8,8 +8,10 @@ import {Subject} from 'rxjs';
 })
 export class InventoryService {
   productsUpdate = new Subject<any>();
+  userUpdate = new Subject<any>();
   productsDelete = new Subject<any>();
   public productList = [];
+  public user;
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -51,6 +53,21 @@ export class InventoryService {
     })).subscribe(output => {
       console.log(output);
       this.productsDelete.next(true);
+    });
+  }
+  public authUser(data) {
+    const url = 'http://localhost:3000/user/login';
+    return this.http.post<any>(url, data, this.httpOptions).pipe(map(response => {
+      return response.response.map(
+        name => name,
+        email => email,
+        id => id
+      );
+    })).subscribe(output => {
+      console.log(output);
+      this.user = output;
+      localStorage.setItem('user_auth', JSON.stringify(this.user));
+      this.userUpdate.next(output);
     });
   }
 }

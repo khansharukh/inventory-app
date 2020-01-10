@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {InventoryService} from '../../inventory.service';
 import {Subscription} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-view',
@@ -11,16 +11,20 @@ import {ActivatedRoute} from '@angular/router';
 export class ViewComponent implements OnInit, OnDestroy {
   private proUnsub: Subscription;
   private routeSub: Subscription;
-  private product = [
-    {name: ''},
-    {id: ''},
-    {description: ''},
-    {in_stock: ''},
-    {created_at: ''}
-  ];
+  private product = {
+    name: '',
+    id: '',
+    description: '',
+    in_stock: '',
+    created_at: ''
+  };
 
-  constructor(private inventoryService: InventoryService, private route: ActivatedRoute) {
+  constructor(private inventoryService: InventoryService, private route: ActivatedRoute, private router: Router) {
     console.log('First');
+    const user = JSON.parse(localStorage.getItem('user_auth'));
+    if (!user) {
+      this.router.navigateByUrl('');
+    }
     this.routeSub = this.route.params.subscribe(params => {
       const pid = params.id;
       this.inventoryService.getSingleProducts(pid);
@@ -35,8 +39,12 @@ export class ViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.proUnsub.unsubscribe();
-    this.routeSub.unsubscribe();
+    if (this.proUnsub) {
+      this.proUnsub.unsubscribe();
+    }
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
   }
 
 }
