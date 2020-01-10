@@ -16,7 +16,10 @@
   <h2>Product</h2>
 
   <div class="card-container negative-margin-30">
-
+    <ul>
+      <!--<button (click)="getProducts()">Products</button>-->
+      <li *ngFor="let product of products" (click)="showAlert(product.id)"> {{ product.name }}</li>
+    </ul>
   </div>
 
   <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
