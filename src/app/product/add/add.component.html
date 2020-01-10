@@ -32,7 +32,11 @@
           <option value="no">No</option>
         </select>
       </div>
-      <button type="button" (click)="pushProducts(proName.value, proDesc.value, proStock.value)" class="btn btn-primary">Login</button>
+      <button type="button" (click)="pushProducts(proName.value, proDesc.value, proStock.value)" class="btn btn-primary">Add Product</button>
+      <br /><br />
+      <a routerLink="/products">
+        Back to Products
+      </a>
     </form>
   </div>
 

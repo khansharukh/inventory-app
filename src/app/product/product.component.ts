@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class ProductComponent implements OnInit, OnDestroy {
   private proUnsub: Subscription;
+  private proDelete: Subscription;
   private products = [];
 
   constructor(private inventoryService: InventoryService, private router: Router) {
@@ -27,6 +28,16 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   showAlert(id: string) {
     this.router.navigateByUrl('/product/view/' + id);
+  }
+  deleteItem(id: string) {
+    const conf = confirm('Are you sure?');
+    if (conf === true) {
+      this.inventoryService.removeProducts(id);
+      this.proDelete = this.inventoryService.productsDelete.subscribe(pro => {
+        this.inventoryService.getProducts();
+      });
+    }
+    return false;
   }
 
   ngOnDestroy(): void {

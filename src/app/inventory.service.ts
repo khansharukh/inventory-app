@@ -8,6 +8,7 @@ import {Subject} from 'rxjs';
 })
 export class InventoryService {
   productsUpdate = new Subject<any>();
+  productsDelete = new Subject<any>();
   public productList = [];
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -38,14 +39,18 @@ export class InventoryService {
   public getSingleProducts(pid) {
     const url = 'http://localhost:3000/product/';
     return this.http.get<any>(url + pid).pipe(map(response => {
-      return response.response.map(
-        name => name,
-        id => id,
-        description => description,
-        created_at => created_at
-      );
+      return response.response;
     })).subscribe(output => {
       this.productsUpdate.next(output);
+    });
+  }
+  public removeProducts(pid) {
+    const url = 'http://localhost:3000/product/delete/';
+    return this.http.delete<any>(url + pid).pipe(map(response => {
+      return response.response;
+    })).subscribe(output => {
+      console.log(output);
+      this.productsDelete.next(true);
     });
   }
 }

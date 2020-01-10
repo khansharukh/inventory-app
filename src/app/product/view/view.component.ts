@@ -11,18 +11,26 @@ import {ActivatedRoute} from '@angular/router';
 export class ViewComponent implements OnInit, OnDestroy {
   private proUnsub: Subscription;
   private routeSub: Subscription;
-  private product;
+  private product = [
+    {name: ''},
+    {id: ''},
+    {description: ''},
+    {in_stock: ''},
+    {created_at: ''}
+  ];
 
   constructor(private inventoryService: InventoryService, private route: ActivatedRoute) {
-    this.proUnsub = this.inventoryService.productsUpdate.subscribe(pro => {
-      this.product = pro[0];
+    console.log('First');
+    this.routeSub = this.route.params.subscribe(params => {
+      const pid = params.id;
+      this.inventoryService.getSingleProducts(pid);
     });
   }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
-      const pid = params.id;
-      this.inventoryService.getSingleProducts(pid);
+    console.log('Second');
+    this.proUnsub = this.inventoryService.productsUpdate.subscribe(pro => {
+      this.product = pro[0];
     });
   }
 
