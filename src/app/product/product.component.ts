@@ -49,4 +49,10 @@ export class ProductComponent implements OnInit, OnDestroy {
       this.proUnsub.unsubscribe();
     }
   }
+
+  logoutUser() {
+    localStorage.removeItem('user_auth');
+    localStorage.clear();
+    this.router.navigateByUrl('');
+  }
 }
