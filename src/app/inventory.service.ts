@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
@@ -9,6 +9,9 @@ import {Subject} from 'rxjs';
 export class InventoryService {
   productsUpdate = new Subject<any>();
   public productList = [];
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -21,6 +24,15 @@ export class InventoryService {
       );
     })).subscribe(output => {
       this.productsUpdate.next(output);
+    });
+  }
+  public addProducts(data) {
+    const url = 'http://localhost:3000/product/add';
+    return this.http.post<any>(url, data, this.httpOptions).pipe(map(response => {
+      return response.response;
+    })).subscribe(output => {
+      this.productsUpdate.next(output);
+      console.log(output);
     });
   }
 }
