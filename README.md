@@ -1,27 +1,39 @@
-# InventoryApp
+## Introduction
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.22.
+To build a simple full-stack inventory management application as a SPA (Single Page Application) using `Angular` and `NodeJs` technology.
 
-## Development server
+## Setup
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<strong>Step 1:</strong> Clone the `nodejs` project repository from [here](https://github.com/khansharukh/inventory) and clone the `angular` app from [here](https://github.com/khansharukh/inventory-app)
 
-## Code scaffolding
+<strong>Step 2:</strong> Create a database with `inventory` name.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<strong>Step 3:</strong> Import the given `inventory.sql` file to the `inventory` database
 
-## Build
+## Steps to run the project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+<strong>Step 1:</strong> Navigate to `inventory` (nodejs) directory.
 
-## Running unit tests
+<strong>Step 2:</strong> Run `node app.js` to run the project. Make sure the `mysql server` is running in the localhost. Node app will run on port `3000`. To directly access the API's please use browser or an app such as `postman`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+<strong>Step 3:</strong> Navigate to `inventory-app` (angular) directory.
 
-## Running end-to-end tests
+<strong>Step 4:</strong> Run `ng serve` for a dev server. Open the browser and navigate to `http://localhost:4200/`. Make sure `nodejs` app is running.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+<strong>Step 5:</strong> Login with the dummy credentials.
 
-## Further help
+## Screenshots
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+![alt text](readme/Screenshot%20from%202020-01-14%2017-47-32.png)
+
+![alt text](readme/Screenshot%20from%202020-01-14%2017-49-33.png)
+
+![alt text](readme/Screenshot%20from%202020-01-14%2017-49-37.png)
+
+![alt text](readme/Screenshot%20from%202020-01-14%2017-50-00.png)
+
+![alt text](readme/Screenshot%20from%202020-01-14%2017-50-05.png)
+
+## InventoryApp
+
+This project was developed as an assignment given by <strong>COMPANY</strong> to <strong>Khan Sharukh</strong> who is the author of this project.
